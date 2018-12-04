@@ -26,10 +26,23 @@ app.get('/usuario', function (req, res) {
                 })
             }
 
-            res.json({
-                ok: true,
-                usuarios
+            Usuario.count({}, (err, conteo) => {
+
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    })
+                }
+
+                res.json({
+                    ok: true,
+                    usuarios,
+                    conteo
+                })
             })
+
+           
         })
 
 })
